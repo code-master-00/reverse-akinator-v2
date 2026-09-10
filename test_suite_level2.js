@@ -531,7 +531,7 @@ export const testSuite = {
 };
 
 // Runner function
-export function runLevel2Suite() {
+export async function runLevel2Suite() {
   console.log('================================================================================');
   console.log('    REVERSE AKINATOR - LEVEL 2 GRANDMASTER BENCHMARK EVALUATION               ');
   console.log('    (Multi-Hop Causal, Anachronisms, Metaphors, Double Negations)               ');
@@ -555,7 +555,7 @@ export function runLevel2Suite() {
         continue;
       }
 
-      const res = evaluateQuestion(t.q, char, null);
+      const res = await evaluateQuestion(t.q, char, null);
       const isCorrect = res.type === t.exp;
 
       if (isCorrect) {

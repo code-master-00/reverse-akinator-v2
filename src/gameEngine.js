@@ -80,7 +80,7 @@ export class GameEngine {
     }
 
     this.questionsAsked++;
-    const evalResult = evaluateQuestion(questionText, this.secretCharacter, this.wikiData);
+    const evalResult = await evaluateQuestion(questionText, this.secretCharacter, this.wikiData);
     this.characterMood = evalResult.mood || 'thinking';
 
     const entry = {

@@ -238,7 +238,7 @@ for (const [catName, tests] of Object.entries(level2Batteries)) {
       continue;
     }
 
-    const res = evaluateQuestion(t.q, character, null);
+    const res = await evaluateQuestion(t.q, character, null);
     const success = res.type === t.exp;
 
     if (success) {
