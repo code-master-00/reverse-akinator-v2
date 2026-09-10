@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "prebuild && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "prebuild": "chmod +x node_modules/.bin/*"
   },
