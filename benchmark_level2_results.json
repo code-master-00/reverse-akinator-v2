@@ -1,0 +1,35 @@
+{
+  "totalL2": 128,
+  "passL2": 125,
+  "failL2": 3,
+  "accuracy": "98%",
+  "l2Failures": [
+    {
+      "category": "Adversarial & Multi-Hop Traps",
+      "character": "Albert Einstein",
+      "question": "Is it untrue that they were awarded a Nobel Prize for scientific discovery?",
+      "expected": "YES",
+      "got": "NO",
+      "commentary": "No, that is not the case; There is a definite and authentic connection to that in their history and lore.",
+      "type": "DoubleNeg"
+    },
+    {
+      "category": "Adversarial & Multi-Hop Traps",
+      "character": "Superman",
+      "question": "Is it false that their biological home planet Krypton was completely destroyed?",
+      "expected": "YES",
+      "got": "NO",
+      "commentary": "No, that is not the case; The last son of Krypton.",
+      "type": "DoubleNeg"
+    },
+    {
+      "category": "Adversarial & Multi-Hop Traps",
+      "character": "Naruto Uzumaki",
+      "question": "Is it untrue that they grew up with a nine-tailed beast inside their body?",
+      "expected": "YES",
+      "got": "NO",
+      "commentary": "No, that is not the case; That distinctive lore element is definitively part of their story.",
+      "type": "DoubleNeg"
+    }
+  ]
+}

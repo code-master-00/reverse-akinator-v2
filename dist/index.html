@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse Akinator AI | The Ultimate Guessing Game</title>
+  <meta name="description" content="Turn the tables on Akinator! The AI secretly picks a character, and you have 20 Yes/No questions to guess who it is. 100% free with zero backend.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-vVV7VX-g.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BIhsgbRR.css">
+</head>
+<body>
+  <div class="stars-bg"></div>
+  <div class="cyber-grid"></div>
+
+  <!-- Main Container -->
+  <div id="app" class="app-container">
+    <!-- Navbar Header -->
+    <header class="app-header">
+      <div class="logo-group">
+        <div class="logo-icon">🔮</div>
+        <div class="logo-text">
+          <h1 class="logo-title">REVERSE <span class="gradient-text">AKINATOR</span></h1>
+          <span class="badge-free">100% FREE AI</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="rulesBtn" class="icon-btn" title="How to play" aria-label="Game Rules">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+        <button id="soundBtn" class="icon-btn" title="Toggle Sound" aria-label="Toggle Sound">
+          <svg id="soundIconOn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          <svg id="soundIconOff" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- VIEW 1: SETUP & TOPIC SELECTION -->
+    <main id="setupView" class="view-panel">
+      <div class="hero-card">
+        <div class="genie-mascot-container">
+          <div class="genie-hologram">
+            <div class="hologram-glow"></div>
+            <div class="genie-avatar" id="mascotAvatar">
+              <!-- Hologram Cyber Genie Face SVG -->
+              <svg viewBox="0 0 120 120" class="genie-svg" id="genieFaceSvg">
+                <defs>
+                  <radialGradient id="genieGrad" cx="50%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#00f2fe" />
+                    <stop offset="70%" stop-color="#4facfe" />
+                    <stop offset="100%" stop-color="#7000ff" />
+                  </radialGradient>
+                  <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+                <circle cx="60" cy="60" r="48" fill="url(#genieGrad)" filter="url(#glowFilter)" opacity="0.85"/>
+                <ellipse cx="60" cy="45" rx="35" ry="12" fill="rgba(255,255,255,0.15)"/>
+                <!-- Eyes -->
+                <g id="genieEyes" class="eyes-neutral">
+                  <circle cx="44" cy="56" r="6" fill="#ffffff" />
+                  <circle cx="76" cy="56" r="6" fill="#ffffff" />
+                  <circle cx="45" cy="55" r="2.5" fill="#0b0f19" />
+                  <circle cx="77" cy="55" r="2.5" fill="#0b0f19" />
+                  <!-- Eyebrows -->
+                  <path d="M 36 46 Q 44 42 52 46" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" id="eyebrowL"/>
+                  <path d="M 68 46 Q 76 42 84 46" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" id="eyebrowR"/>
+                </g>
+                <!-- Mouth -->
+                <path id="genieMouth" d="M 48 76 Q 60 86 72 76" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
+              </svg>
+            </div>
+            <div class="hologram-rings">
+              <span class="ring ring-1"></span>
+              <span class="ring ring-2"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <h2 class="hero-title">Think you can outsmart the <span class="gradient-text">AI Genie</span>?</h2>
+          <p class="hero-subtitle">
+            I will secretly pick a character from any universe. You have <strong>20 Yes/No questions</strong> to unmask my secret. Guess at any time, or surrender with "I Quit"!
+          </p>
+        </div>
+      </div>
+
+      <!-- Categories Section -->
+      <section class="category-section">
+        <div class="section-header">
+          <h3 class="section-title">Select a Universe:</h3>
+          <span class="section-hint">Choose a topic or pick Random</span>
+        </div>
+        <div id="categoryGrid" class="category-grid">
+          <!-- Categories populated dynamically via JS -->
+        </div>
+
+        <!-- Custom Topic Option -->
+        <div class="custom-topic-box">
+          <div class="custom-topic-header">
+            <span class="sparkle-icon">✨</span>
+            <span class="custom-topic-label">Or challenge the AI with a Custom Topic:</span>
+          </div>
+          <div class="custom-input-row">
+            <input type="text" id="customTopicInput" placeholder="e.g. Star Wars, Greek Mythology, Formula 1, Harry Potter..." maxlength="60" />
+            <button id="customTopicBtn" class="btn btn-secondary">Start Custom</button>
+          </div>
+        </div>
+
+        <div class="start-action-row">
+          <button id="startGameBtn" class="btn btn-primary btn-large">
+            <span>START GAME</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- VIEW 2: GAME BOARD & CHATROOM -->
+    <main id="gameView" class="view-panel hidden">
+      <!-- Game HUD Bar -->
+      <div class="game-hud">
+        <div class="hud-category">
+          <span class="hud-label">Category:</span>
+          <span id="hudCategoryBadge" class="hud-value-badge">⚔️ Anime & Manga</span>
+        </div>
+
+        <!-- Question Counter & Progress Ring -->
+        <div class="hud-counter-box" id="hudCounterBox">
+          <div class="progress-ring-container">
+            <svg class="progress-ring" width="48" height="48">
+              <circle class="progress-ring-track" stroke="rgba(255,255,255,0.1)" stroke-width="4" fill="transparent" r="20" cx="24" cy="24" />
+              <circle id="progressRingBar" class="progress-ring-bar" stroke="#00f2fe" stroke-width="4" stroke-linecap="round" fill="transparent" r="20" cx="24" cy="24" />
+            </svg>
+            <span id="hudQuestionsCount" class="progress-number">20</span>
+          </div>
+          <div class="counter-text">
+            <span class="counter-title">Questions Left</span>
+            <span id="hudCounterSubtext" class="counter-sub">Out of 20</span>
+          </div>
+        </div>
+
+        <!-- Quick Game Controls -->
+        <div class="hud-actions">
+          <button id="openGuessModalBtn" class="btn btn-accent btn-sm" title="Guess character identity directly">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon><line x1="16" y1="12" x2="12" y2="12"></line></svg>
+            <span>Direct Guess</span>
+          </button>
+          <button id="quitGameBtn" class="btn btn-outline btn-sm" title="Surrender and reveal character">
+            <span>I Quit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- AI Mascot State & Speech Bar -->
+      <div class="ai-status-card">
+        <div class="ai-mini-hologram" id="inGameAvatar">
+          <div class="avatar-ring-glow"></div>
+          <div class="avatar-face" id="inGameFace">🔮</div>
+        </div>
+        <div class="ai-speech-bubble" id="aiSpeechBubble">
+          <div class="speech-author">AI Genie</div>
+          <p id="aiSpeechText" class="speech-content">I've picked my secret entity! Go ahead and ask your first Yes/No question.</p>
+        </div>
+      </div>
+
+      <!-- Question Feed / History Area -->
+      <div class="chat-container">
+        <div id="chatFeed" class="chat-feed">
+          <!-- Chat messages rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Quick Question Prompt Chips -->
+      <div class="prompt-chips-container">
+        <span class="chips-label">Quick Inquiries:</span>
+        <div id="promptChipsList" class="chips-list">
+          <button class="chip-btn" data-q="Is this character fictional?">Are they fictional?</button>
+          <button class="chip-btn" data-q="Is this person still alive today?">Are they alive today?</button>
+          <button class="chip-btn" data-q="Is this entity female?">Are they female?</button>
+          <button class="chip-btn" data-q="Do they have superhuman powers?">Do they have powers?</button>
+          <button class="chip-btn" data-q="Are they from an anime or manga?">From anime/manga?</button>
+          <button class="chip-btn" data-q="Are they known for science or tech?">Known for science/tech?</button>
+          <button class="chip-btn" data-q="Are they an athletic sports legend?">Are they an athlete?</button>
+          <button class="chip-btn" data-q="Do they wear a mask or armor?">Do they wear a mask?</button>
+        </div>
+      </div>
+
+      <!-- Question Input Bar -->
+      <div class="input-dock">
+        <form id="questionForm" class="question-form">
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="questionInput" 
+              placeholder="Ask a Yes/No question (e.g., 'Is this character from Earth?')..." 
+              autocomplete="off" 
+              required
+              maxlength="140"
+            />
+          </div>
+          <button type="submit" id="askBtn" class="btn btn-primary btn-icon-only" aria-label="Submit Question">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <!-- FINAL GUESSES BANNER (Visible during final phase) -->
+    <div id="finalGuessesBar" class="final-guesses-banner hidden">
+      <div class="final-banner-content">
+        <div class="final-badge">⚡ CLIMAX MODE</div>
+        <div class="final-text">
+          <strong>20 Questions Exhausted!</strong> You have <span id="finalGuessesCount" class="highlight-guesses">3</span> final guesses remaining.
+        </div>
+        <button id="openClimaxGuessBtn" class="btn btn-accent btn-sm">Enter Final Guess</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECT GUESS MODAL -->
+  <div id="guessModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🎯</span>
+          <h3 id="guessModalTitle" class="modal-title">Identify the Character</h3>
+        </div>
+        <button id="closeGuessModalBtn" class="modal-close-btn" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="guessModalDescription" class="modal-desc">
+          Think you know who it is? Type the name of the character or real-life figure. If you're right, you win instantly!
+        </p>
+        <form id="guessForm" class="guess-form">
+          <input 
+            type="text" 
+            id="guessInput" 
+            placeholder="e.g. Iron Man, Albert Einstein, Luffy, Messi..." 
+            autocomplete="off" 
+            required 
+            maxlength="60"
+          />
+          <div id="guessErrorMsg" class="guess-feedback hidden"></div>
+          <div class="modal-actions">
+            <button type="button" id="cancelGuessBtn" class="btn btn-outline">Cancel</button>
+            <button type="submit" id="submitGuessBtn" class="btn btn-accent">Submit Guess</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME OVER / VICTORY / REVEAL MODAL -->
+  <div id="revealModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card reveal-card">
+      <div class="reveal-header" id="revealHeader">
+        <div id="revealOutcomeIcon" class="outcome-icon">🏆</div>
+        <h2 id="revealTitle" class="reveal-title">YOU WIN!</h2>
+        <p id="revealSubtitle" class="reveal-subtitle">You cracked the secret character!</p>
+      </div>
+
+      <div class="reveal-body">
+        <!-- Character Portrait & Card -->
+        <div class="character-card">
+          <div class="character-avatar-wrapper">
+            <img id="revealCharacterImg" src="" alt="Character Portrait" class="character-img hidden" />
+            <div id="revealCharacterFallback" class="character-avatar-fallback">🔮</div>
+          </div>
+          <div class="character-info">
+            <h3 id="revealCharacterName" class="character-name">Character Name</h3>
+            <div class="character-meta-tags" id="revealMetaTags">
+              <span class="tag-badge" id="revealCategoryTag">Anime</span>
+              <span class="tag-badge" id="revealOriginTag">Japan</span>
+              <span class="tag-badge" id="revealStatusTag">Fictional</span>
+            </div>
+            <p id="revealTrivia" class="character-trivia">
+              "Character trivia and fascinating fact will appear right here."
+            </p>
+          </div>
+        </div>
+
+        <!-- Game Stats Summary -->
+        <div class="game-stats-grid">
+          <div class="stat-card">
+            <span class="stat-num" id="statQuestionsAsked">0</span>
+            <span class="stat-label">Questions Asked</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statGuessesMade">0</span>
+            <span class="stat-label">Guesses Attempted</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num" id="statAccuracy">100%</span>
+            <span class="stat-label">Result</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-footer">
+        <button id="playAgainBtn" class="btn btn-primary btn-large">
+          <span>PLAY AGAIN</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY / RULES MODAL -->
+  <div id="rulesModal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">📖</span>
+          <h3 class="modal-title">How to Play Reverse Akinator</h3>
+        </div>
+        <button id="closeRulesModalBtn" class="modal-close-btn" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body rules-body">
+        <div class="rule-step">
+          <div class="step-badge">1</div>
+          <div class="step-text">
+            <strong>The AI Picks a Secret:</strong> The AI Genie secretly chooses an iconic character or person from your chosen universe.
+          </div>
+        </div>
+        <div class="rule-step">
+          <div class="step-badge">2</div>
+          <div class="step-text">
+            <strong>Ask up to 20 Yes/No Questions:</strong> Inquire about gender, superpowers, living status, fictional world, or lore (e.g. <em>"Are they alive?"</em>, <em>"Do they have superpowers?"</em>).
+          </div>
+        </div>
+        <div class="rule-step">
+          <div class="step-badge">3</div>
+          <div class="step-text">
+            <strong>Direct Guess Anytime:</strong> At any point, click <strong>Direct Guess</strong>. If you are right, you win instantly!
+          </div>
+        </div>
+        <div class="rule-step">
+          <div class="step-badge">4</div>
+          <div class="step-text">
+            <strong>The 3 Final Guesses:</strong> If all 20 questions are used without guessing, you get <strong>3 Final Guesses</strong> before the AI reveals the character and wins.
+          </div>
+        </div>
+        <div class="rule-step">
+          <div class="step-badge">5</div>
+          <div class="step-text">
+            <strong>I Quit:</strong> Stumped? Click "I Quit" at any moment to view the identity and biography.
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="gotItBtn" class="btn btn-primary">Got it, Let's Play!</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
