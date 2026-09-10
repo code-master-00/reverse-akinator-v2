@@ -45,7 +45,7 @@ You must answer ONLY with a JSON object in this exact format, with no extra text
 }`;
 
     const response = await ai.models.generateContent({
-      model: 'Gemini 3.5 Flash Lite',
+      model: 'gemini-2.5-flash',
       contents: prompt,
       config: {
         responseMimeType: "application/json"
