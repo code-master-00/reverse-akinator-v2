@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    
+
     // For local Vite dev, we might receive the parsed body or a raw string/buffer
     let body = req.body;
     if (!body) {
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     }
 
     const { characterContext, question } = body;
-    
+
     if (!characterContext || !question) {
       res.statusCode = 400;
       return res.end(JSON.stringify({ error: 'Missing characterContext or question' }));
@@ -45,7 +45,7 @@ You must answer ONLY with a JSON object in this exact format, with no extra text
 }`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-1.5-flash',
+      model: 'Gemini 3.5 Flash Lite',
       contents: prompt,
       config: {
         responseMimeType: "application/json"
@@ -55,7 +55,7 @@ You must answer ONLY with a JSON object in this exact format, with no extra text
     const textResponse = response.text;
     const jsonStart = textResponse.indexOf('{');
     const jsonEnd = textResponse.lastIndexOf('}');
-    
+
     const parsedData = JSON.parse(textResponse.substring(jsonStart, jsonEnd + 1));
 
     res.statusCode = 200;
@@ -66,9 +66,9 @@ You must answer ONLY with a JSON object in this exact format, with no extra text
     console.error('Gemini API Error:', err);
     res.statusCode = 500;
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({ 
-      error: 'Internal Server Error', 
-      type: 'NO', 
+    res.end(JSON.stringify({
+      error: 'Internal Server Error',
+      type: 'NO',
       commentary: 'I seem to have lost my train of thought. Could you ask that again?',
       mood: 'thinking'
     }));
